@@ -3,6 +3,7 @@ import "./App.css";
 import Home from "pages/Home";
 import { Navbar } from "components";
 import About from "pages/Home/About";
+import Projects from "pages/Projects";
 
 const App: FC = (): ReactElement => {
   return (
@@ -10,6 +11,7 @@ const App: FC = (): ReactElement => {
       <Navbar />
       <Home />
       <About />
+      <Projects />
     </>
   );
 };

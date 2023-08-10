@@ -5,8 +5,8 @@ import ScrollableRole from "./ScrollableRole";
 
 const useStyles = createStyles((theme) => ({
   container: {
-    width: "100vw",
-    height: "50vh",
+    width: "100%",
+    height: "75vh",
     padding: theme.spacing.xl,
     display: "flex",
     flexDirection: "column",
@@ -21,7 +21,7 @@ const useStyles = createStyles((theme) => ({
   },
   box: {
     width: "100%",
-    maxWidth: '60rem',
+    maxWidth: "60rem",
     padding: `${theme.spacing.md}`,
     transformOrigin: "left",
     display: "block",
@@ -47,6 +47,7 @@ const textContainerVariants: Variants = {
       },
       delay: 0.7,
       staggerChildren: 0.2,
+      type: "tween",
     },
   },
 };
@@ -74,6 +75,7 @@ const Layout: FC = (): ReactElement => {
             opacity: { delay: 0.2 },
             ease: "easeInOut",
             duration: 0.5,
+            type: "tween",
           }}
         >
           <Title size={50} variant="gradient" color="teal">

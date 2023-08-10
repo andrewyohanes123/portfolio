@@ -97,6 +97,8 @@ const ScrollableRole: FC = (): ReactElement => {
         animate={{ width: "fit-content" }}
         initial={{ width: 0 }}
         className={classes.roleContainer}
+        layout
+        layoutId="role-container"
       >
         <motion.h4 className={classes.role}>&gt;</motion.h4>
         <AnimatePresence mode="wait">
