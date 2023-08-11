@@ -1,6 +1,7 @@
-import { Container, Text, Title, createStyles } from "@mantine/core";
+import { Container, SimpleGrid, Title, createStyles } from "@mantine/core";
 import { projects } from "consts";
 import { FC, ReactElement } from "react";
+import Card from "./Card";
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -18,9 +19,11 @@ const Layout: FC = (): ReactElement => {
         <Title color="blue" order={2}>
           Projects
         </Title>
-        {projects.map((project) => (
-          <Text key={project.name}>{project.name}</Text>
-        ))}
+        <SimpleGrid my="xl" cols={2}>
+          {projects.map((project) => (
+            <Card project={project} key={`${project.name}-item-card`} />
+          ))}
+        </SimpleGrid>
       </Container>
     </section>
   );

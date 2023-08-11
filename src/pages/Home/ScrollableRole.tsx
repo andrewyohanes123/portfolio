@@ -74,7 +74,6 @@ const ScrollableRole: FC = (): ReactElement => {
   const [roleIndex, setRoleIndex] = useState<number>(0);
   const { start, active, stop } = useInterval(() => {
     setRoleIndex((index) => {
-      console.log(index);
       return index === roles.length - 1 ? 0 : index + 1;
     });
   }, 3000);

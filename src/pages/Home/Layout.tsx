@@ -52,10 +52,30 @@ const textContainerVariants: Variants = {
   },
 };
 
+const bannerVariants: Variants = {
+  hidden: {
+    height: 0,
+  },
+  visible: {
+    height: "75vh",
+    transition: {
+      delayChildren: 0.6,
+      duration: 0.4,
+      staggerChildren: 0.2,
+      delay: 0.2
+    },
+  },
+};
+
 const Layout: FC = (): ReactElement => {
   const { classes } = useStyles();
   return (
-    <div className={classes.container}>
+    <motion.div
+      variants={bannerVariants}
+      initial="hidden"
+      animate="visible"
+      className={classes.container}
+    >
       <Box
         variants={textContainerVariants}
         animate="visible"
@@ -84,7 +104,7 @@ const Layout: FC = (): ReactElement => {
         </motion.div>
         <ScrollableRole />
       </Box>
-    </div>
+    </motion.div>
   );
 };
 
