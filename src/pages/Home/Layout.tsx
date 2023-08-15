@@ -26,18 +26,31 @@ const useStyles = createStyles((theme) => ({
     transformOrigin: "left",
     display: "block",
   },
+  name: {
+    fontSize: 50,
+    color: theme.colors.blue[5],
+    margin: 0,
+    display: "block",
+    overflow: "hidden",
+  },
+  nameWrapper: {
+    overFlow: "hidden",
+    // display: "flex",
+    // flexDirection: "column",
+  },
+  nameSpan: {
+    display: "inline-block",
+  },
 }));
 
 const textContainerVariants: Variants = {
   initial: {
-    opacity: 0,
-    y: -500,
-    scale: 0.5,
+    // opacity: 0,
+    // y: 200,
   },
   visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
+    // opacity: 1,
+    // y: 0,
     transition: {
       // y: {
       //   delay: 0.2,
@@ -48,21 +61,37 @@ const textContainerVariants: Variants = {
       delay: 0.7,
       staggerChildren: 0.2,
       type: "tween",
+      delayChildren: 0.7
     },
   },
 };
 
 const bannerVariants: Variants = {
   hidden: {
-    height: 0,
+    // height: "25vh",
+    opacity: 0,
   },
   visible: {
-    height: "75vh",
+    // height: "75vh",
     transition: {
       delayChildren: 0.6,
       duration: 0.4,
       staggerChildren: 0.2,
-      delay: 0.2
+      delay: 0.2,
+    },
+    opacity: 1,
+  },
+};
+
+const spanVariants: Variants = {
+  hidden: {
+    y: -100,
+  },
+  visible: {
+    y: 0,
+    transition: {
+      delay: 0.65,
+      delayChildren: 0.25,
     },
   },
 };
@@ -87,8 +116,9 @@ const Layout: FC = (): ReactElement => {
           Hi There!
         </Title>
         <motion.div
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          className={classes.nameWrapper}
+          // initial={{ y: 0, opacity: 1 }}
+          // animate={{ y: 0, opacity: 1 }}
           transition={{
             staggerChildren: 0.1,
             delay: 0.8,
@@ -98,9 +128,41 @@ const Layout: FC = (): ReactElement => {
             type: "tween",
           }}
         >
-          <Title size={50} variant="gradient" color="teal">
-            I'm Yohanes Andrew
-          </Title>
+          <motion.h1
+            className={classes.name}
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            transition={{
+              staggerChildren: 0.1,
+              delayChildren: 0.2,
+              delay: 1,
+            }}
+          >
+            <motion.span
+              className={classes.nameSpan}
+              variants={spanVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              I'm&nbsp;
+            </motion.span>
+            <motion.span
+              className={classes.nameSpan}
+              variants={spanVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              Yohanes&nbsp;
+            </motion.span>
+            <motion.span
+              className={classes.nameSpan}
+              variants={spanVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              Andrew
+            </motion.span>
+          </motion.h1>
         </motion.div>
         <ScrollableRole />
       </Box>

@@ -4,6 +4,7 @@ import Home from "pages/Home";
 import { Navbar } from "components";
 import About from "pages/Home/About";
 import Projects from "pages/Projects";
+import Contact from "pages/Contact";
 
 const App: FC = (): ReactElement => {
   return (
@@ -12,6 +13,7 @@ const App: FC = (): ReactElement => {
       <Home />
       <About />
       <Projects />
+      <Contact />
     </>
   );
 };

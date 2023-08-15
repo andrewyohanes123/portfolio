@@ -17,19 +17,24 @@ type props = {
 const useStyles = createStyles((theme) => ({
   textContainer: {
     padding: theme.spacing.md,
-    paddingBottom: theme.spacing.xs,
-    background: theme.fn.linearGradient(
-      180,
-      theme.fn.rgba(theme.white, 0),
-      theme.fn.rgba(theme.colors.gray[8], 0.6),
-      theme.fn.rgba(theme.colors.gray[8], 1)
-    ),
+    paddingBottom: theme.spacing.md,
+    // background: theme.fn.linearGradient(
+    //   180,
+    //   theme.fn.rgba(theme.white, 0),
+    //   theme.fn.rgba(theme.colors.gray[8], 0.6),
+    //   theme.fn.rgba(theme.colors.gray[8], 1)
+    // ),
+    background: theme.fn.rgba(theme.colors.gray[9], 0.65),
     position: "absolute",
     zIndex: 10,
     bottom: 0,
     left: 0,
     right: 0,
     width: "100%",
+    backdropFilter: "blur(10px)",
+    borderTopLeftRadius: theme.radius.md,
+    borderTopRightRadius: theme.radius.md,
+    boxShadow: theme.shadows.md,
   },
   card: {
     position: "relative",
@@ -55,7 +60,7 @@ const textContainerVariants: Variants = {
     opacity: 1,
     y: 0,
     transition: {
-      delay: 0.1,
+      delay: 0.3,
       duration: 0.3,
       ease: "easeInOut",
       type: "tween",

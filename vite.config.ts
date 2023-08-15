@@ -5,4 +5,15 @@ import viteTsconfigPaths from "vite-tsconfig-paths";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), viteTsconfigPaths()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          mantine: ["@mantine/core", "@mantine/hooks", "@mantine/carousel"],
+          react: ["react"],
+          framer: ["framer-motion"],
+        },
+      },
+    },
+  },
 });
