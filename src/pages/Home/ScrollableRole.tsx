@@ -37,6 +37,7 @@ const roleTextVariant: Variants = {
       rotateY: {
         delay: 0.3,
       },
+      duration: 0.6,
     },
     rotateY: -15,
   },
@@ -51,6 +52,7 @@ const roleTextVariant: Variants = {
       rotateY: {
         delay: 0.3,
       },
+      duration: 0.6,
     },
     rotateY: 0,
   },
@@ -65,6 +67,7 @@ const roleTextVariant: Variants = {
       rotateY: {
         delay: 0.3,
       },
+      duration: 0.6,
     },
     rotateY: 15,
   },
@@ -106,9 +109,11 @@ const ScrollableRole: FC = (): ReactElement => {
           {roles.map((role, index) => (
             <motion.div
               key={`role-item-${role}-${index}`}
-              style={{
-                display: index !== customIndex ? "none" : "inline-block",
-              }}
+              style={
+                {
+                  display: index !== customIndex ? "none" : "inline-block",
+                }
+              }
             >
               {index === customIndex && (
                 <motion.h4
@@ -118,11 +123,6 @@ const ScrollableRole: FC = (): ReactElement => {
                   exit="exit"
                   layoutId={role}
                   className={classes.role}
-                  transition={{
-                    duration: 1,
-                    type: "tween",
-                    ease: "easeInOut",
-                  }}
                 >
                   {role}
                 </motion.h4>

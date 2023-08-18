@@ -7,6 +7,7 @@ import Projects from "pages/Projects";
 import Contact from "pages/Contact";
 import Experiences from "pages/Experiences";
 import { Box, createStyles } from "@mantine/core";
+import { useScroll } from "framer-motion";
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -16,6 +17,7 @@ const useStyles = createStyles((theme) => ({
 
 const App: FC = (): ReactElement => {
   const { classes } = useStyles();
+  const { scrollY } = useScroll();
 
   useEffect(() => {
     document.title = "Yohanes Andrew | Web Developer";
@@ -23,7 +25,7 @@ const App: FC = (): ReactElement => {
 
   return (
     <Box className={classes.container}>
-      <Navbar />
+      <Navbar scrollValue={scrollY} />
       <Home />
       <About />
       <Projects />

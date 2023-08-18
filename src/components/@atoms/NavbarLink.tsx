@@ -6,17 +6,16 @@ const useStyles = createStyles((theme) => ({
   button: {
     background: "transparent",
     border: "none",
-    color: theme.colors.dark[5],
+    color: theme.colors.dark[4],
     fontSize: theme.fontSizes.md,
     transition: "all 0.5s ease-in-out",
-    fontWeight: 500,
+    fontWeight: 600,
     padding: `${theme.spacing.sm}`,
     ":hover": {
       color: theme.colors.green[5],
       transition: "all 0.5s ease-in-out",
-      marginLeft: theme.spacing.lg,
-      marginRight: theme.spacing.lg,
     },
+    cursor: "pointer",
   },
 }));
 

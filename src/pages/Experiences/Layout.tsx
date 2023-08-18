@@ -7,6 +7,8 @@ import {
   Text,
   createStyles,
 } from "@mantine/core";
+import { experiences } from "consts";
+import dayjs from "dayjs";
 
 const useStyles = createStyles((theme) => ({
   timelineContainer: {
@@ -23,13 +25,21 @@ const Layout: FC = (): ReactElement => {
       <Container py="xl">
         <Title order={3}>Experiences</Title>
         <Box my="xl" className={classes.timelineContainer}>
-          <Timeline>
-            <Timeline.Item title="Pemerintah Kota Manado">
-              <Text>Testing</Text>
-              <Text color="dimmed" size="sm">
-                2019
-              </Text>
-            </Timeline.Item>
+          <Timeline active={experiences.length}>
+            {experiences.map((experience, index) => (
+              <Timeline.Item
+                key={`timeline-item-${index}-${experience.instance}`}
+                title={experience.instance}
+              >
+                <Title order={5}>{experience.role}</Title>
+                <Text>{experience.description}</Text>
+                <Text color="dimmed" size="sm">
+                  {`${dayjs(experience.year[0]).format("MM/YYYY")} - ${dayjs(
+                    experience.year[1]
+                  ).format("MM/YYYY")}`}
+                </Text>
+              </Timeline.Item>
+            ))}
           </Timeline>
         </Box>
       </Container>

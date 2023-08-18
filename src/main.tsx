@@ -6,6 +6,7 @@ import { MantineProvider, MantineThemeOverride } from "@mantine/core";
 
 const theme: MantineThemeOverride = {
   fontFamily: "Inter",
+  defaultRadius: 'md'
 };
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

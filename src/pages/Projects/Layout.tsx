@@ -1,13 +1,13 @@
-import { Container, SimpleGrid, Title, createStyles } from "@mantine/core";
+import { Container, Title, createStyles } from "@mantine/core";
 import { projects } from "consts";
-import { FC, ReactElement } from "react";
-import Card from "./Card";
+import { FC, ReactElement, useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import ProjectDetail from "./ProjectDetail";
+import Project from "./Project";
 
 const useStyles = createStyles((theme) => ({
   container: {
-    background: theme.colors.gray[8],
+    background: theme.colors.gray[0],
     paddingTop: theme.spacing.xl,
     paddingBotton: theme.spacing.xl,
   },
@@ -16,19 +16,30 @@ const useStyles = createStyles((theme) => ({
 const Layout: FC = (): ReactElement => {
   const { classes } = useStyles();
   const [drawer, { open, close }] = useDisclosure();
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
   return (
     <section className={classes.container}>
       <Container py="xl">
-        <Title onClick={open} color="blue" order={2}>
+        <Title onClick={open} mb="md" color="blue" order={2}>
           Projects
         </Title>
-        <SimpleGrid my="xl" cols={2}>
-          {projects.map((project) => (
-            <Card project={project} key={`${project.name}-item-card`} />
-          ))}
-        </SimpleGrid>
+        {projects.map((project, index) => (
+          <Project
+            onClickDetail={() => {
+              setSelectedIndex(index);
+              open();
+            }}
+            project={project}
+            key={`${project.name}-item-card`}
+          />
+        ))}
       </Container>
-      <ProjectDetail onClose={close} opened={drawer} />
+      <ProjectDetail
+        selectedIndex={selectedIndex}
+        onClose={close}
+        opened={drawer}
+      />
     </section>
   );
 };

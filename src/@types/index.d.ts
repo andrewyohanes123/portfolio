@@ -17,3 +17,12 @@ export type ProjectLink = {
 };
 
 export type Projects = Project[];
+
+export type Experience = {
+  instance: string;
+  description: ReactNode;
+  year: [Date, Date];
+  role: string;
+};
+
+export type Experiences = Experience[];
