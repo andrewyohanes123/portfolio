@@ -48,6 +48,7 @@ const useStyles = createStyles((theme) => ({
     transformOrigin: "top",
     cursor: "pointer",
     transition: "all ease-in-out 500ms",
+    border: `none`,
   },
 }));
 

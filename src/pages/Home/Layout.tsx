@@ -1,7 +1,9 @@
-import { Box, Title, createStyles } from "@mantine/core";
+import { Box, Button, Group, Title, createStyles } from "@mantine/core";
 import { Variants, motion } from "framer-motion";
 import { FC, ReactElement } from "react";
 import ScrollableRole from "./ScrollableRole";
+import background from "assets/images/resources/rect234.png";
+import { IconBrandGithub, IconDownload } from "@tabler/icons-react";
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -12,12 +14,19 @@ const useStyles = createStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    background: theme.fn.linearGradient(
+    backgroundColor: theme.fn.linearGradient(
       10,
       theme.colors.teal[0],
       theme.colors.cyan[0],
       theme.colors.blue[1]
     ),
+    backgroundImage: `url(${background})`,
+    backgroundSize: "50%",
+    backgroundBlendMode: "soft-light",
+    backgroundRepeat: "repeat-x",
+    [theme.fn.smallerThan("sm")]: {
+      backgroundSize: "150%",
+    },
   },
   box: {
     width: "100%",
@@ -35,11 +44,10 @@ const useStyles = createStyles((theme) => ({
   },
   nameWrapper: {
     overFlow: "hidden",
-    // display: "flex",
-    // flexDirection: "column",
   },
   nameSpan: {
     display: "inline-block",
+    textShadow: theme.shadows.lg,
   },
 }));
 
@@ -49,19 +57,14 @@ const textContainerVariants: Variants = {
     // y: 200,
   },
   visible: {
-    // opacity: 1,
-    // y: 0,
     transition: {
-      // y: {
-      //   delay: 0.2,
-      // },
       opacity: {
         delay: 0.5,
       },
       delay: 0.7,
       staggerChildren: 0.2,
       type: "tween",
-      delayChildren: 0.7
+      delayChildren: 0.7,
     },
   },
 };
@@ -72,7 +75,6 @@ const bannerVariants: Variants = {
     opacity: 0,
   },
   visible: {
-    // height: "75vh",
     transition: {
       delayChildren: 0.6,
       duration: 0.4,
@@ -85,16 +87,17 @@ const bannerVariants: Variants = {
 
 const spanVariants: Variants = {
   hidden: {
-    y: -100,
+    y: 100,
   },
-  visible: {
+  visible: (index: number) => ({
     y: 0,
     transition: {
-      delay: 0.65,
-      delayChildren: 0.25,
+      delay: 0.7 * index + 0.01,
     },
-  },
+  }),
 };
+
+const nameString: string[] = "I'm Yohanes Andrew".split(" ");
 
 const Layout: FC = (): ReactElement => {
   const { classes } = useStyles();
@@ -120,7 +123,6 @@ const Layout: FC = (): ReactElement => {
           // initial={{ y: 0, opacity: 1 }}
           // animate={{ y: 0, opacity: 1 }}
           transition={{
-            staggerChildren: 0.1,
             delay: 0.8,
             opacity: { delay: 0.2 },
             ease: "easeInOut",
@@ -138,32 +140,28 @@ const Layout: FC = (): ReactElement => {
               delay: 1,
             }}
           >
-            <motion.span
-              className={classes.nameSpan}
-              variants={spanVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              I'm&nbsp;
-            </motion.span>
-            <motion.span
-              className={classes.nameSpan}
-              variants={spanVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              Yohanes&nbsp;
-            </motion.span>
-            <motion.span
-              className={classes.nameSpan}
-              variants={spanVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              Andrew
-            </motion.span>
+            {nameString.map((word, index) => (
+              <motion.span
+                className={classes.nameSpan}
+                variants={spanVariants}
+                initial="hidden"
+                animate="visible"
+                key={`${word}-${index}`}
+                custom={index}
+              >
+                {word}&nbsp;
+              </motion.span>
+            ))}
           </motion.h1>
         </motion.div>
+        <Group py="md">
+          <Button color="dark" component="a" target="_blank" href="https://github.com/andrewyohanes123/" leftIcon={<IconBrandGithub />}>
+            GitHub
+          </Button>
+          <Button leftIcon={<IconDownload />} variant="white">
+            My Resume
+          </Button>
+        </Group>
         <ScrollableRole />
       </Box>
     </motion.div>

@@ -1,10 +1,19 @@
+import { TablerIconsProps } from "@tabler/icons-react";
+import { FC, ReactNode } from "react";
+
 export type Project = {
-  name:string;
+  name: string;
   pictures: string[];
   type: ("mobile" | "web")[];
-  description: string;
+  description: ReactNode;
   technologies: string[];
-  links: string[];
+  links: ProjectLink[];
+};
+
+export type ProjectLink = {
+  link: string;
+  label: ReactNode;
+  icon: FC<TablerIconsProps>;
 };
 
 export type Projects = Project[];

@@ -1,13 +1,14 @@
-import { FC, ReactElement, useEffect, useState } from "react";
+import { FC, ReactElement, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, Variants, motion } from "framer-motion";
 import { useInterval } from "@mantine/hooks";
 import { createStyles } from "@mantine/core";
+import { IconChevronRight } from "@tabler/icons-react";
 
 const roles: string[] = ["Frontend Developer", "UI/UX Enthusiast", "3D Artist"];
 
 const useStyles = createStyles((theme) => ({
   roleContainer: {
-    padding: `${theme.spacing.xs} ${theme.spacing.xs}`,
+    padding: `${theme.spacing.xs} ${theme.spacing.md}`,
     borderRadius: theme.radius.md,
     background: theme.colors.gray[7],
     marginTop: theme.spacing.md,
@@ -70,13 +71,14 @@ const roleTextVariant: Variants = {
 };
 
 const ScrollableRole: FC = (): ReactElement => {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const [roleIndex, setRoleIndex] = useState<number>(0);
   const { start, active, stop } = useInterval(() => {
     setRoleIndex((index) => {
-      return index === roles.length - 1 ? 0 : index + 1;
+      return index + 1;
     });
   }, 3000);
+  const customIndex = useMemo(() => roleIndex % roles.length, [roleIndex]);
 
   useEffect(() => {
     start();
@@ -99,62 +101,34 @@ const ScrollableRole: FC = (): ReactElement => {
         layout
         layoutId="role-container"
       >
-        <motion.h4 className={classes.role}>&gt;</motion.h4>
+        <IconChevronRight color={theme.white} />
         <AnimatePresence mode="wait">
-          {roleIndex === 0 && (
-            <motion.h4
-              variants={roleTextVariant}
-              initial="initial"
-              animate="visible"
-              exit="exit"
-              key={roles[0]}
-              layoutId={roles[0]}
-              className={classes.role}
-              transition={{
-                duration: 1,
-                type: "tween",
-                ease: "easeInOut",
+          {roles.map((role, index) => (
+            <motion.div
+              key={`role-item-${role}-${index}`}
+              style={{
+                display: index !== customIndex ? "none" : "inline-block",
               }}
             >
-              {roles[0]}
-            </motion.h4>
-          )}
-          {roleIndex === 1 && (
-            <motion.h4
-              variants={roleTextVariant}
-              initial="initial"
-              animate="visible"
-              exit="exit"
-              key={roles[1]}
-              layoutId={roles[1]}
-              className={classes.role}
-              transition={{
-                duration: 1,
-                type: "tween",
-                ease: "easeInOut",
-              }}
-            >
-              {roles[1]}
-            </motion.h4>
-          )}
-          {roleIndex === 2 && (
-            <motion.h4
-              variants={roleTextVariant}
-              initial="initial"
-              animate="visible"
-              exit="exit"
-              key={roles[2]}
-              layoutId={roles[2]}
-              className={classes.role}
-              transition={{
-                duration: 1,
-                type: "tween",
-                ease: "easeInOut",
-              }}
-            >
-              {roles[2]}
-            </motion.h4>
-          )}
+              {index === customIndex && (
+                <motion.h4
+                  variants={roleTextVariant}
+                  initial="initial"
+                  animate="visible"
+                  exit="exit"
+                  layoutId={role}
+                  className={classes.role}
+                  transition={{
+                    duration: 1,
+                    type: "tween",
+                    ease: "easeInOut",
+                  }}
+                >
+                  {role}
+                </motion.h4>
+              )}
+            </motion.div>
+          ))}
         </AnimatePresence>
       </motion.div>
     </motion.div>
