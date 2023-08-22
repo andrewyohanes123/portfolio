@@ -34,12 +34,12 @@ const roleTextVariant: Variants = {
         delay: 0.15,
         duration: 0.5,
       },
-      rotateY: {
+      scale: {
         delay: 0.3,
       },
       duration: 0.6,
     },
-    rotateY: -15,
+    scale: 0.7,
   },
   visible: {
     y: 0,
@@ -49,12 +49,14 @@ const roleTextVariant: Variants = {
         delay: 0.15,
         duration: 0.5,
       },
-      rotateY: {
+      scale: {
         delay: 0.3,
       },
-      duration: 0.6,
+      duration: 0.8,
+      ease: 'easeInOut',
+      type: 'tween'
     },
-    rotateY: 0,
+    scale: 1,
   },
   exit: {
     y: -200,
@@ -64,12 +66,12 @@ const roleTextVariant: Variants = {
         delay: 0.15,
         duration: 0.5,
       },
-      rotateY: {
+      scale: {
         delay: 0.3,
       },
       duration: 0.6,
     },
-    rotateY: 15,
+    scale: 0.715,
   },
 };
 
@@ -91,6 +93,8 @@ const ScrollableRole: FC = (): ReactElement => {
     };
   }, [stop, start, active]);
 
+  const role = roles[customIndex];
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -106,29 +110,17 @@ const ScrollableRole: FC = (): ReactElement => {
       >
         <IconChevronRight color={theme.white} />
         <AnimatePresence mode="wait">
-          {roles.map((role, index) => (
-            <motion.div
-              key={`role-item-${role}-${index}`}
-              style={
-                {
-                  display: index !== customIndex ? "none" : "inline-block",
-                }
-              }
-            >
-              {index === customIndex && (
-                <motion.h4
-                  variants={roleTextVariant}
-                  initial="initial"
-                  animate="visible"
-                  exit="exit"
-                  layoutId={role}
-                  className={classes.role}
-                >
-                  {role}
-                </motion.h4>
-              )}
-            </motion.div>
-          ))}
+          <motion.h4
+            variants={roleTextVariant}
+            initial="initial"
+            animate="visible"
+            exit="exit"
+            // layoutId={role}
+            key={`${customIndex}-${role}`}
+            className={classes.role}
+          >
+            {role}
+          </motion.h4>
         </AnimatePresence>
       </motion.div>
     </motion.div>
