@@ -19,12 +19,13 @@ const ProjectDetail: FC<props> = ({
     <Drawer
       opened={opened}
       onClose={onClose}
-      title="Project Detail"
       position="bottom"
       zIndex={500}
       size="xl"
+      
     >
       <Container>
+
         <Title order={3} variant="gradient" mb="md">
           {selectedProject.name}
         </Title>
