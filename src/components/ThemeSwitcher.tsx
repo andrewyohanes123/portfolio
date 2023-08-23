@@ -83,7 +83,7 @@ const ThemeSwitcher: FC<props> = ({ onClick }): ReactElement => {
       onClick={onClick}
       whileTap="clicked"
     >
-      <AnimatePresence initial={false}>
+      <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={theme.colorScheme}
           variants={iconContainerVariants}
