@@ -12,7 +12,10 @@ import { FC, ReactElement } from "react";
 
 const useStyles = createStyles((theme) => ({
   card: {
-    background: theme.colors.gray[0],
+    background:
+      theme.colorScheme === "dark"
+        ? theme.colors.gray[8]
+        : theme.colors.gray[0],
     borderRadius: theme.radius.lg,
     padding: theme.spacing.md,
     margin: `${theme.spacing.xs} 0`,
@@ -20,7 +23,9 @@ const useStyles = createStyles((theme) => ({
     minHeight: 500,
     overflow: "hidden",
     boxShadow: theme.shadows.sm,
-    border: `1px solid ${theme.colors.gray[2]}`,
+    border: `1px solid ${
+      theme.colorScheme === "dark" ? theme.colors.gray[7] : theme.colors.gray[2]
+    }`,
     [theme.fn.smallerThan("sm")]: {
       display: "flex",
       alignItems: "center",
@@ -49,7 +54,7 @@ const useStyles = createStyles((theme) => ({
     right: "-40%",
     bottom: "-15%",
     width: "100%",
-    border: `1px solid ${theme.colors.gray[1]}`,
+    border: `1px solid ${theme.colorScheme === "dark" ? theme.colors.gray[7] : theme.colors.gray[1]}`,
     [theme.fn.smallerThan("sm")]: {
       position: "relative",
       right: 0,

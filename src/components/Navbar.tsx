@@ -46,15 +46,21 @@ const navbarVariants: Variants = {
 const Navbar: FC<props> = ({ scrollValue }): ReactElement => {
   const { classes, theme } = useStyles();
   const blur = useTransform(scrollValue, [0, 100], ["blur(0px)", "blur(10px)"]);
+  const navbarBg =
+    theme.colorScheme === "dark" ? theme.colors.gray[8] : theme.white;
+  const navbarBorderColor =
+    theme.colorScheme === "dark"
+      ? theme.fn.rgba(theme.colors.gray[7], 0.3)
+      : theme.fn.rgba(theme.colors.gray[1], 0.3);
   const backgroundColor = useTransform(
     scrollValue,
     [0, 100],
-    [theme.fn.rgba(theme.white, 0), theme.fn.rgba(theme.white, 0.6)]
+    [theme.fn.rgba(navbarBg, 0), theme.fn.rgba(navbarBg, 0.6)]
   );
   const border = useTransform(
     scrollValue,
     [0, 100],
-    [`0 px solid ${theme.colors.gray[1]}`, `1 px solid ${theme.colors.gray[1]}`]
+    [`0px solid ${navbarBorderColor}`, `1px solid ${navbarBorderColor}`]
   );
 
   return (
@@ -62,7 +68,7 @@ const Navbar: FC<props> = ({ scrollValue }): ReactElement => {
       style={{
         backdropFilter: blur,
         backgroundColor,
-        border,
+        borderBottom: border,
       }}
       className={classes.navbar}
       variants={navbarVariants}

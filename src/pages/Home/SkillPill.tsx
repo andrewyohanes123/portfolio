@@ -11,9 +11,10 @@ const useStyles = createStyles((theme) => ({
   pill: {
     padding: `${theme.spacing.xs} ${theme.spacing.lg}`,
     borderRadius: 20,
-    border: `1px solid ${theme.colors.gray[0]}`,
+    border: `1px solid ${theme.colorScheme === "dark" ? theme.colors.gray[7] : theme.colors.gray[1]}`,
     boxShadow: theme.shadows.md,
-    background: theme.white,
+    background:
+      theme.colorScheme === "dark" ? theme.colors.gray[8] : theme.white,
     transformOrigin: "bottom",
   },
 }));

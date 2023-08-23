@@ -35,7 +35,8 @@ const useStyles = createStyles((theme) => ({
       theme.colorScheme === "dark"
         ? theme.colors.dark[5]
         : theme.colors.gray[2],
-    background: theme.colorScheme === "dark" ? theme.black : theme.white,
+    background:
+      theme.colorScheme === "dark" ? theme.black : theme.colors.gray[0],
     borderWidth: 1,
     borderStyle: "solid",
     borderRadius: "25%",
@@ -61,14 +62,14 @@ const iconContainerVariants: Variants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 4.6,
+      duration: 0.6,
       type: "tween",
       ease: "backInOut",
     },
   },
   exit: {
     y: -100,
-    opacity: 0,
+    // opacity: 0,
   },
 };
 
@@ -82,17 +83,21 @@ const ThemeSwitcher: FC<props> = ({ onClick }): ReactElement => {
       animate="visible"
       onClick={onClick}
       whileTap="clicked"
+      key="switch"
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={theme.colorScheme}
+          layout
           variants={iconContainerVariants}
+          animate="visible"
+          initial="hidden"
           exit="exit"
         >
           {theme.colorScheme === "dark" ? (
-            <IconMoon size={ICON_SIZE} />
+            <IconSun size={ICON_SIZE} />
           ) : (
-            <IconSun size={ICON_SIZE} color={theme.colors.gray[6]} />
+            <IconMoon size={ICON_SIZE} />
           )}
         </motion.div>
       </AnimatePresence>

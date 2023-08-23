@@ -2,7 +2,7 @@ import { Box, Button, Group, Title, createStyles } from "@mantine/core";
 import { Variants, motion } from "framer-motion";
 import { FC, ReactElement } from "react";
 import ScrollableRole from "./ScrollableRole";
-import background from "assets/images/resources/rect234.png";
+// import background from "assets/images/resources/rect234.png";
 import { IconBrandGithub, IconDownload } from "@tabler/icons-react";
 
 const useStyles = createStyles((theme) => ({
@@ -14,16 +14,16 @@ const useStyles = createStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: theme.fn.linearGradient(
-      10,
-      theme.colors.teal[0],
-      theme.colors.cyan[0],
-      theme.colors.blue[1]
+    background: theme.fn.linearGradient(
+      180,
+      theme.colors.cyan[theme.colorScheme === "dark" ? 8 : 0],
+      theme.colors.blue[theme.colorScheme === "dark" ? 5 : 1],
+      theme.colors.teal[theme.colorScheme === "dark" ? 4 : 0]
     ),
-    backgroundImage: `url(${background})`,
-    backgroundSize: "50%",
-    backgroundBlendMode: "soft-light",
-    backgroundRepeat: "repeat-x",
+    // backgroundImage: `url(${background})`,
+    // backgroundSize: "50%",
+    // backgroundBlendMode: "soft-light",
+    // backgroundRepeat: "repeat-x",
     [theme.fn.smallerThan("sm")]: {
       backgroundSize: "150%",
     },
@@ -37,7 +37,10 @@ const useStyles = createStyles((theme) => ({
   },
   name: {
     fontSize: 50,
-    color: theme.colors.blue[5],
+    color:
+      theme.colorScheme === "dark"
+        ? theme.colors.teal[2]
+        : theme.colors.blue[5],
     margin: 0,
     display: "block",
     overflow: "hidden",
@@ -100,7 +103,7 @@ const spanVariants: Variants = {
 const nameString: string[] = "I'm Yohanes Andrew".split(" ");
 
 const Layout: FC = (): ReactElement => {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   return (
     <motion.div
       variants={bannerVariants}
@@ -115,7 +118,10 @@ const Layout: FC = (): ReactElement => {
         className={classes.box}
         component={motion.div}
       >
-        <Title color="dark" order={3}>
+        <Title
+          color={theme.colorScheme === "dark" ? "white" : "dark"}
+          order={3}
+        >
           Hi There!
         </Title>
         <motion.div
@@ -155,7 +161,13 @@ const Layout: FC = (): ReactElement => {
           </motion.h1>
         </motion.div>
         <Group py="md">
-          <Button color="dark" component="a" target="_blank" href="https://github.com/andrewyohanes123/" leftIcon={<IconBrandGithub />}>
+          <Button
+            color="dark"
+            component="a"
+            target="_blank"
+            href="https://github.com/andrewyohanes123/"
+            leftIcon={<IconBrandGithub />}
+          >
             GitHub
           </Button>
           <Button leftIcon={<IconDownload />} variant="white">

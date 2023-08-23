@@ -1,5 +1,4 @@
 import { FC, ReactElement, useCallback, useEffect, useState } from "react";
-import "./App.css";
 import Home from "pages/Home";
 import { Navbar } from "components";
 import About from "pages/Home/About";
@@ -15,9 +14,9 @@ import {
 } from "@mantine/core";
 
 import { MantineThemeOverride } from "@mantine/core";
-
 import { useScroll } from "framer-motion";
 import ThemeSwitcher from "components/ThemeSwitcher";
+import "./App.css";
 
 const theme: MantineThemeOverride = {
   fontFamily: "Inter",
@@ -29,10 +28,15 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
+const { matches: darkMode } = window.matchMedia("(prefers-color-scheme: dark)");
+
 const App: FC = (): ReactElement => {
   const { classes } = useStyles();
   const { scrollY } = useScroll();
-  const [scheme, setScheme] = useState<ColorScheme>("light");
+  // const darkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const [scheme, setScheme] = useState<ColorScheme>(
+    darkMode ? "dark" : "light"
+  );
 
   const toggleScheme = useCallback(() => {
     setScheme((currentScheme) => (currentScheme === "dark" ? "light" : "dark"));

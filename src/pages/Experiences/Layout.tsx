@@ -13,15 +13,20 @@ import dayjs from "dayjs";
 const useStyles = createStyles((theme) => ({
   timelineContainer: {
     padding: `${theme.spacing.xl} ${theme.spacing.md}`,
-    backgroundColor: theme.white,
+    backgroundColor:
+      theme.colorScheme === "dark" ? theme.colors.gray[9] : theme.white,
     borderRadius: theme.radius.xl,
+  },
+  container: {
+    background:
+      theme.colorScheme === "dark" ? theme.colors.gray[8] : "transparent",
   },
 }));
 
 const Layout: FC = (): ReactElement => {
   const { classes } = useStyles();
   return (
-    <Box component="section" px="xl">
+    <Box className={classes.container} component="section" px="xl">
       <Container py="xl">
         <Title order={3}>Experiences</Title>
         <Box my="xl" className={classes.timelineContainer}>

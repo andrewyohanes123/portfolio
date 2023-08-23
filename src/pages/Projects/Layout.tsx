@@ -7,7 +7,10 @@ import Project from "./Project";
 
 const useStyles = createStyles((theme) => ({
   container: {
-    background: theme.colors.gray[0],
+    background:
+      theme.colorScheme === "dark"
+        ? theme.colors.gray[8]
+        : theme.colors.gray[0],
     paddingTop: theme.spacing.xl,
     paddingBotton: theme.spacing.xl,
   },

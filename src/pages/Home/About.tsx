@@ -19,14 +19,19 @@ const useStyles = createStyles((theme) => ({
   section: {
     borderBottom: `1px solid ${theme.colors.gray[2]}`,
     paddingBottom: theme.spacing.xl,
-    background: "radial-gradient(rgba(0, 0, 0, 0) 3px,white 1px)",
+    background:
+      theme.colorScheme === "dark"
+        ? theme.colors.teal[4]
+        : theme.colors.teal[0],
     backgroundSize: `4px 4px`,
   },
   image: {
     width: 150,
     height: 150,
     borderRadius: theme.radius.xl,
-    border: `5px solid ${theme.colors.gray[0]}`,
+    border: `5px solid ${
+      theme.colorScheme === "dark" ? theme.colors.gray[8] : theme.white
+    }`,
     boxShadow: theme.shadows.xl,
     display: "block",
     marginTop: theme.spacing.md,
@@ -42,7 +47,8 @@ const useStyles = createStyles((theme) => ({
     // overflow: "hidden",
   },
   textContainer: {
-    background: theme.white,
+    background:
+      theme.colorScheme === "dark" ? theme.colors.gray[8] : theme.white,
     borderRadius: theme.radius.xl,
   },
 }));
